@@ -1,0 +1,41 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Yeni tərəfdaş</h4>
+                        </div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'dashboards:index' %}">Əsas səhifə</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboards:partners-list' %}">Tərəfdaşlar</a></li>
+                            </ol>
+                        </nav>
+                        <div class="card-body">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12" for="{{ form.image.id_for_label }}">Şəkil</label>
+                                    <div class="col-sm-12">
+                                        {{ form.image }}
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <div class="col-sm-12 col-md-7">
+                                        <button class="btn btn-success">Yadda saxla</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

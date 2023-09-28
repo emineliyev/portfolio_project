@@ -1,0 +1,104 @@
+{% load static %}
+<div class="main-sidebar sidebar-style-2">
+    <aside id="sidebar-wrapper">
+        <!-- Logo Start -->
+        <div class="sidebar-brand">
+            <a href="index.html">
+                <img alt="image" src="{% static 'dashboard/assets/img/logo/logo.png' %}" class="header-logo"/>
+                <span class="logo-name">Otika</span>
+            </a>
+        </div>
+        <!-- Logo End -->
+
+        <ul class="sidebar-menu">
+
+            <li class="dropdown">
+                <a href="{% url 'dashboards:index' %}" class="nav-link"><i data-feather="monitor"></i><span>Admin panel</span></a>
+            </li>
+            <li class="menu-header">Pages</li>
+            <!-- About Start -->
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                        data-feather="briefcase"></i><span>Haqqımızda</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{% url 'dashboards:about' pk=1 %}">Haqqımızda</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:business-plan' %}">Biznes plan</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:partners-list' %}">Tərəftaşlar</a></li>
+                </ul>
+            </li>
+            <!-- About End -->
+
+            <!-- Portfolio Start -->
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                        data-feather="command"></i><span>Layihələr</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="{% url 'dashboards:portfolio-list' %}">Layihələr</a></li>
+                    <li><a class="nav-link" href="portfolio.html">Kateqoriyalar</a></li>
+                </ul>
+            </li>
+            <!-- Portfolio End -->
+
+            <!-- Slider Start -->
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                        data-feather="mail"></i><span>Slayderlər</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
+                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
+                    <li><a class="nav-link" href="email-read.html">read</a></li>
+                </ul>
+            </li>
+            <!-- Slider End -->
+
+            <!-- Services Start -->
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                        data-feather="mail"></i><span>Xidmətlər</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
+                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
+                    <li><a class="nav-link" href="email-read.html">read</a></li>
+                </ul>
+            </li>
+            <!-- Services End -->
+
+            <!-- Team Start -->
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                        data-feather="mail"></i><span>Komandamız</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
+                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
+                    <li><a class="nav-link" href="email-read.html">read</a></li>
+                </ul>
+            </li>
+            <!-- Team End -->
+
+            <!-- Testimations Start -->
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                        data-feather="mail"></i><span>Şərhlər</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
+                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
+                    <li><a class="nav-link" href="email-read.html">read</a></li>
+                </ul>
+            </li>
+            <!-- Testimations End -->
+
+            <!-- Arrangements Start -->
+            <li class="dropdown">
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i
+                        data-feather="mail"></i><span>Parametrlər</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
+                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
+                    <li><a class="nav-link" href="email-read.html">read</a></li>
+                </ul>
+            </li>
+            <!-- Arrangements End -->
+
+        </ul>
+    </aside>
+</div>

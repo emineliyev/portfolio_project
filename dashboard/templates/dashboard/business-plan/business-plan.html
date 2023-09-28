@@ -1,0 +1,59 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            {% include 'dashboard/inc/_message.html' %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+
+                        <div class="card-header">
+                            <h4>Biznes planlar</h4>
+                        </div>
+                        <div class="buttons mx-4 mt-2">
+                            <a href="{% url 'dashboards:add-business-plan' %}" class="btn btn-success">Yenisini əlavə
+                                edin</a>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-md">
+                                    <tr>
+                                        <th>Ad</th>
+                                        <th>Məzmun</th>
+                                        <th>İkon</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    {% for business in businesses %}
+                                    <tr id="buisnessCell">
+                                        <td>{{ business.title }}</td>
+                                        {% autoescape off %}
+                                        <td>{{ business.description|slice:":100" }}</td>
+                                        {% endautoescape %}
+                                        <td><i class="{{ business.icon }}"></i></td>
+                                        <td class="cell_btn"><a
+                                                href="{% url 'dashboards:update-business-plan' business.pk %}"
+                                                class="btn btn-icon btn-primary"><i
+                                                class="far fa-edit"></i></a></td>
+                                        <td class="cell_btn">
+                                            <a
+                                                    href="{% url 'dashboards:business_plan_delete' business.pk %}"
+                                                    class="btn btn-icon btn-danger swal"
+                                                    data-business-id="{{ business.pk }}">
+                                                <i class="fas fa-times"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

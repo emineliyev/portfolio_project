@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "portfolio-project"
+version = "0.1.0"
+description = ""
+authors = ["emin <emineliyev87@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+psycopg2-binary = "^2.9.7"
+pillow = "^10.0.0"
+django = "4.0"
+django-multiupload = "^0.6.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

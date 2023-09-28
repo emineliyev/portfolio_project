@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+
+<!-- blank.html  21 Nov 2019 03:54:41 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+    <title>Otika - Admin Dashboard Template</title>
+    <!-- General CSS Files -->
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/app.min.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/bundles/summernote/summernote-bs4.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/bundles/dropzonejs/dropzone.css' %}">
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/components.css' %}">
+    <!-- Custom style CSS -->
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/custom.css' %}">
+    <link rel="stylesheet" href="{% static 'dashboard/assets/css/main.css' %}">
+    <link rel='shortcut icon' type='image/x-icon' href="{% static 'dashboard/assets/img/favicon.ico' %}"/>
+</head>
+
+<body>
+<div class="loader"></div>
+<div id="app">
+    <div class="main-wrapper main-wrapper-1">
+        <div class="navbar-bg"></div>
+
+        <!-- Nav Content Start -->
+        {% include 'dashboard/inc/_nav.html' %}
+        <!-- Nav Content End -->
+
+
+        <!-- Nav Sidebar Start -->
+        {% include 'dashboard/inc/_sidebar.html' %}
+        <!-- Nav Sidebar End -->
+
+        <!-- Main Content Start -->
+        {% block content %}{% endblock %}
+        <!-- Main Content End -->
+
+        <!-- Footer Content Start -->
+        {% include 'dashboard/inc/_footer.html' %}
+        <!-- Footer Content End -->
+    </div>
+</div>
+<!-- General JS Scripts -->
+<script src="{% static 'dashboard/assets/js/app.min.js' %}"></script>
+
+<!-- JS Libraies -->
+<script src="{% static 'dashboard/assets/bundles/summernote/summernote-bs4.js' %}"></script>
+<script src="{% static 'dashboard/assets/bundles/ckeditor/ckeditor.js' %}"></script>
+<script src="{% static 'dashboard/assets/bundles/sweetalert/sweetalert.min.js' %}"></script>
+<script src="{% static 'dashboard/assets/js/page/sweetalert.js' %}"></script>
+<script src="{% static 'dashboard/assets/bundles/dropzonejs/min/dropzone.min.js' %}"></script>
+
+<!-- Page Specific JS File -->
+<script src="{% static 'dashboard/assets/js/page/ckeditor.js' %}"></script>
+
+<!-- Template JS File -->
+<script src="{% static 'dashboard/assets/js/scripts.js' %}"></script>
+<script src="{% static 'dashboard/assets/js/page/multiple-upload.js' %}"></script>
+
+<!-- Custom JS File -->
+<script src="{% static 'dashboard/assets/js/custom.js' %}"></script>
+<script>
+    setTimeout(function () {
+        if ($('#msg').length > 0) {
+            $('#msg').fadeOut();
+        }
+    }, 3000)
+</script>
+</body>
+
+
+<!-- blank.html  21 Nov 2019 03:54:41 GMT -->
+</html>
