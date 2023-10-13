@@ -5,6 +5,7 @@
 <div class="main-content">
     <section class="section">
         <div class="section-body">
+            {% include 'dashboard/inc/_message.html' %}
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -14,68 +15,54 @@
                         <div class="buttons mx-4 mt-2">
                             <a href="{% url 'dashboards:create-portfolio' %}" class="btn btn-success">Yenisini əlavə
                                 edin</a>
-                            <div class="form-group col-md-4">
-                                <label for="search">Axtar</label>
-                                <input id="search" type="search" class="form-control">
-                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-striped" id="table-1">
                                     <thead>
                                     <tr>
-                                        <th class="text-center">
-                                            #
-                                        </th>
-                                        <th>Task Name</th>
-                                        <th>Progress</th>
-                                        <th>Members</th>
-                                        <th>Due Date</th>
+                                        <th>Layihə adı</th>
+                                        <th>Kateqoriya</th>
+                                        <th>Müştəri</th>
+                                        <th>Təhvil tarixi</th>
                                         <th>Status</th>
-                                        <th>Action</th>
+                                        <th>Şəkil</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    {% for portfolio in portfolios %}
                                     <tr>
+                                        <td>{{ portfolio.title }}</td>
+                                        <td>{{ portfolio.category }}</td>
+                                        <td>{{ portfolio.client }}</td>
+                                        <td>{{ portfolio.delivery_date }}</td>
                                         <td>
-                                            1
-                                        </td>
-                                        <td>Create a mobile app</td>
-                                        <td class="align-middle">
-                                            <div class="progress progress-xs">
-                                                <div class="progress-bar bg-success width-per-40">
-                                                </div>
-                                            </div>
+                                            {% if portfolio.status == True %}
+                                            <div class="badge badge-success badge-shadow">Activ</div>
+                                            {% else %}
+                                            <div class="badge badge-danger badge-shadow">Passiv</div>
+                                            {% endif %}
                                         </td>
                                         <td>
-                                            <img alt="image" src="assets/img/users/user-5.png" width="35">
+                                            {% for img in portfolio.portfolio_image.all %}
+                                            <img alt="image" src="{{ img.image.url }}" width="60">
+                                            {% endfor %}
                                         </td>
-                                        <td>2018-01-20</td>
-                                        <td>
-                                            <div class="badge badge-success badge-shadow">Completed</div>
+                                        <td class="cell_btn text-center"><a
+                                                href="{% url 'dashboards:update-portfolio' portfolio.pk %}"
+                                                class="btn btn-primary"><i class="fas fa-pen-square"></i></a></td>
+                                        <td class="cell_btn text-center">
+                                            <a href="{% url 'dashboards:portfolio_delete' portfolio.pk %}"
+                                               class="btn btn-danger swal" data-portfolio-id="{{ portfolio.pk }}"><i
+                                                    class="fas fa-trash-alt"></i>
+                                            </a>
                                         </td>
-                                        <td><a href="#" class="btn btn-primary">Detail</a></td>
                                     </tr>
+                                    {% endfor %}
                                     </tbody>
                                 </table>
-                                <div class="card-body">
-                                    <nav aria-label="...">
-                                        <ul class="pagination justify-content-end">
-                                            <li class="page-item disabled">
-                                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                            <li class="page-item active">
-                                                <a class="page-link" href="#">2 <span
-                                                        class="sr-only">(current)</span></a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item">
-                                                <a class="page-link" href="#">Next</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
                             </div>
                         </div>
                     </div>

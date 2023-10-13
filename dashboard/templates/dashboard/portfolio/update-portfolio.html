@@ -1,10 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Redakte edin</h4>
+                        </div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'dashboards:index' %}">Əsas səhifə</a></li>
+                                <li class="breadcrumb-item"><a
+                                        href="{% url 'dashboards:portfolio-list' %}">Layihələr</a></li>
+                            </ol>
+                        </nav>
+                        <div class="card-body">
+                            <form action="#" method="post" enctype="multipart/form-data" class="needs-validation"
+                                  novalidate="">
+                                {% csrf_token %}
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.title.id_for_label }}">Layihənin adı</label>
+                                    <div class="col-sm-12">
+                                        {{ form.title }}
+                                        <div class="invalid-feedback">
+                                            Bu sahə boş ola bilməz!
+                                        </div>
+                                    </div>
+                                </div>
 
-</body>
-</html>
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.category.id_for_label }}">Kateqoriya</label>
+                                    <div class="col-sm-12">
+                                        {{ form.category }}
+                                        <div class="invalid-feedback">
+                                            Bir kateqoriya seçin!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.client.id_for_label }}">Müştəri</label>
+                                    <div class="col-sm-12">
+                                        {{ form.client }}
+                                        <div class="invalid-feedback">
+                                            Bu sahə boş ola bilməz!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.delivery_date.id_for_label }}">Təhvil tarixi</label>
+                                    <div class="col-sm-12">
+                                        {{ form.delivery_date }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.portfolio_url.id_for_label }}">Layihəyə keçid</label>
+                                    <div class="col-sm-12">
+                                        {{ form.portfolio_url }}
+                                        <div class="invalid-feedback">
+                                            Doğru url daxil edin!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Silmək üçün şəkil seçin</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label class="form-label">Redakte etmək üçün şəkili işarələyib yenisini
+                                                seçin </label>
+                                            <div class="row gutters-sm">
+                                                {% for image in images %}
+                                                <div class="col-6 col-sm-4">
+                                                    <label class="imagecheck mb-4">
+                                                        <input name="delete_images" type="checkbox"
+                                                               value="{{ image.id }}" class="imagecheck-input"/>
+                                                        <span class="imagecheck-figure">
+                                                            <img src="{{ image.image.url }}" alt="}" width="200"
+                                                                 class="imagecheck-image">
+                                                        </span>
+                                                    </label>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                            {{ form.image }}
+                                            {{ form.error }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.description.id_for_label }}">Məzmun</label>
+                                    <div class="col-sm-12">
+                                        {{ form.description }}
+                                        {{ form.error }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="control-label">Layihəni aktiv etmək üçün çekboksu aktiv edin</div>
+                                    <label class="custom-switch mt-2" for="{{ form.status.id_for_label }}">
+                                        {{ form.status }}
+                                        <span class="custom-switch-indicator"></span>
+                                        <span class="custom-switch-description">Status: Activ / Passiv</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <div class="col-sm-12 col-md-7">
+                                        <button class="btn btn-success">Yadda saxla</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            {% include 'dashboard/inc/_message.html' %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Kateqoriyalar</h4>
+                        </div>
+                        <div class="buttons mx-4 mt-2">
+                            <a href="{% url 'dashboards:create-category' %}" class="btn btn-success">Yenisini əlavə
+                                edin</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>Kateqoriya adı</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for category in categories %}
+                                    <tr>
+                                        <td>{{ category.name }}</td>
+                                        <td class="cell_btn text-center"><a
+                                                href="{% url 'dashboards:update-category' category.pk %}"
+                                                class="btn btn-primary"><i class="fas fa-pen-square"></i></a></td>
+                                        <td class="cell_btn text-center">
+                                            <a href="{% url 'dashboards:category_delete' category.pk %}"
+                                               class="btn btn-danger swal" data-category-id="{{ category.pk }}"><i
+                                                    class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

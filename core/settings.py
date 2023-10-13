@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'dashboard.apps.DashboardConfig',
     'multiupload',
+    'django.contrib.postgres',
 ]
 
 MIDDLEWARE = [

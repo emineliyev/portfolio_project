@@ -1,0 +1,66 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            {% include 'dashboard/inc/_message.html' %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Əməkdaşlar</h4>
+                        </div>
+                        <div class="buttons mx-4 mt-2">
+                            <a href="{% url 'dashboards:create-team' %}" class="btn btn-success">Yenisini əlavə
+                                edin</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="table-1">
+                                    <thead>
+                                    <tr>
+                                        <th>Adı</th>
+                                        <th>Vəzifə</th>
+                                        <th>Şəkil</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for team in teams %}
+                                    <tr>
+                                        <td>{{ team.name }}</td>
+                                        <td>{{ team.position }}</td>
+                                        <td>
+                                            <img alt="image" src="{{ team.photo.url }}" width="60">
+                                        </td>
+                                        <td>
+                                            {% for t_icon in team.icon.all %}
+                                            <i class="{{  t_icon.icon_code }}"></i>
+                                            {% endfor %}
+                                        </td>
+                                        <td class="cell_btn text-center"><a
+                                                href="{% url 'dashboards:update-team' team.pk %}"
+                                                class="btn btn-primary"><i class="fas fa-pen-square"></i></a></td>
+                                        <td class="cell_btn text-center">
+                                            <a href="{% url 'dashboards:team_delete' team.pk %}"
+                                               class="btn btn-danger swal" data-team-id="{{ team.pk }}"><i
+                                                    class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

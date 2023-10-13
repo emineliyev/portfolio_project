@@ -1,0 +1,69 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Yeni xidmət növü</h4>
+                        </div>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="{% url 'dashboards:index' %}">Əsas səhifə</a></li>
+                                <li class="breadcrumb-item"><a href="{% url 'dashboards:services-type-list' %}">Xidmət növləri</a></li>
+                            </ol>
+                        </nav>
+                        <div class="card-body">
+                            <form action="{% url 'dashboards:create-services-type' %}" method="post"
+                                  class="needs-validation" novalidate="">
+                                {% csrf_token %}
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.name.id_for_label }}">Başlıq</label>
+                                    <div class="col-sm-12">
+                                        {{ form.name }}
+                                        <div class="invalid-feedback">
+                                            Bu sahə boş ola bilməz!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.description.id_for_label }}">Məzmun</label>
+                                    <div class="col-sm-12">
+                                        {{ form.description }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">İkon seçin</label>
+                                    <div class="selectgroup selectgroup-pills">
+                                        {% for choice in form.icon %}
+                                        <label class="selectgroup-item">
+                                            {{ choice.tag|safe }}
+
+                                            <span class="selectgroup-button selectgroup-button-icon">
+                                                <i class="{{ choice.choice_label }}"></i>
+                                            </span>
+                                        </label>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <div class="col-sm-12 col-md-7">
+                                        <button class="btn btn-success">Yadda saxla</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

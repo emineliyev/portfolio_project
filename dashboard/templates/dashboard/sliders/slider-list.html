@@ -1,0 +1,68 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Main Content -->
+<div class="main-content">
+    <section class="section">
+        <div class="section-body">
+            {% include 'dashboard/inc/_message.html' %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Slayderlər</h4>
+                        </div>
+                        <div class="buttons mx-4 mt-2">
+                            <a href="{% url 'dashboards:create-slider' %}" class="btn btn-success">Yenisini əlavə
+                                edin</a>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped" id="table-1">
+                                    <thead>
+                                    <tr>
+                                        <th>Slayder adı</th>
+                                        <th>Məzmun</th>
+                                        <th>Status</th>
+                                        <th>Şəkil</th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for slider in sliders %}
+                                    <tr>
+                                        <td>{{ slider.title }}</td>
+                                        <td>{{ slider.description|slice:":30" }}</td>
+                                        <td>
+                                            {% if slider.status == True %}
+                                            <div class="badge badge-success badge-shadow">Activ</div>
+                                            {% else %}
+                                            <div class="badge badge-danger badge-shadow">Passiv</div>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <img alt="image" src="{{ slider.image.url }}" width="60">
+                                        </td>
+                                        <td class="cell_btn text-center"><a
+                                                href="{% url 'dashboards:update-slider' slider.pk %}"
+                                                class="btn btn-primary"><i class="fas fa-pen-square"></i></a></td>
+                                        <td class="cell_btn text-center">
+                                            <a href="{% url 'dashboards:slider_delete' slider.pk %}"
+                                               class="btn btn-danger swal" data-slider-id="{{ slider.pk }}"><i
+                                                    class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

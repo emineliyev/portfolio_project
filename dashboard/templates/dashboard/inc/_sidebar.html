@@ -34,20 +34,16 @@
                         data-feather="command"></i><span>Layihələr</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{% url 'dashboards:portfolio-list' %}">Layihələr</a></li>
-                    <li><a class="nav-link" href="portfolio.html">Kateqoriyalar</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:category-list' %}">Kateqoriyalar</a></li>
                 </ul>
             </li>
             <!-- Portfolio End -->
 
             <!-- Slider Start -->
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="mail"></i><span>Slayderlər</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
-                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
-                    <li><a class="nav-link" href="email-read.html">read</a></li>
-                </ul>
+            <li>
+                <a href="{% url 'dashboards:slider-list' %}" class="nav-link">
+                    <i data-feather="mail"></i><span>Slayderlər</span>
+                </a>
             </li>
             <!-- Slider End -->
 
@@ -56,22 +52,17 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
                         data-feather="mail"></i><span>Xidmətlər</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
-                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
-                    <li><a class="nav-link" href="email-read.html">read</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:service' pk=1 %}">Xidmət başlıq</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:services-type-list' %}">Xidmət növləri</a></li>
                 </ul>
             </li>
             <!-- Services End -->
 
             <!-- Team Start -->
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="mail"></i><span>Komandamız</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
-                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
-                    <li><a class="nav-link" href="email-read.html">read</a></li>
-                </ul>
+            <li>
+                <a href="{% url 'dashboards:team-list' %}" class="nav-link">
+                    <i data-feather="mail"></i><span>Əməkdaşlar</span>
+                </a>
             </li>
             <!-- Team End -->
 
@@ -92,9 +83,11 @@
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
                         data-feather="mail"></i><span>Parametrlər</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
-                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
-                    <li><a class="nav-link" href="email-read.html">read</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:icon-lists' %}">Ikonlar</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:phone-list' %}">Telefon nömrələri</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:email-list' %}">Email ünvanlar</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:social-network-list' %}">Sosial şəbəkə</a></li>
+                    <li><a class="nav-link" href="email-read.html">Əlaqə</a></li>
                 </ul>
             </li>
             <!-- Arrangements End -->
