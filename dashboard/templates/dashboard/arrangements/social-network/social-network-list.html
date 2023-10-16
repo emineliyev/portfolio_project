@@ -48,8 +48,8 @@
                                                 class="btn btn-icon btn-primary"><i
                                                 class="far fa-edit"></i></a></td>
                                         <td class="cell_btn">
-                                            <a href="" class="btn btn-icon btn-danger swal"
-                                                    data-services_type-id="{{ services_type.pk }}">
+                                            <a href="{% url 'dashboards:network_delete' network.pk %}" class="btn btn-icon btn-danger swal"
+                                                    data-network-id="{{ network.pk }}">
                                                 <i class="fas fa-trash-alt"></i>
                                             </a>
                                         </td>

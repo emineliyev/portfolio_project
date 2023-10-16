@@ -5,7 +5,7 @@ from .views import index, AddAbout, AddBusinessPlan, BusinessPlanView, delete_bu
     UpdateSlider, slider_delete, UpdateService, ServiceTypeView, CreateServiceType, UpdateServiceType, \
     service_type_delete, TeamView, CreateTeam, UpdateTeam, team_delete, IconView, CreateIcon, UpdateIcon, icon_delete, \
     PhoneView, CreatePhone, UpdatePhone, phone_delete, EmailView, CreateEmail, UpdateEmail, email_delete, SocIconView, \
-    SocIconCreate, SocIconUpdate
+    SocIconCreate, SocIconUpdate, network_delete, AddContact
 
 app_name = 'dashboards'
 urlpatterns = [
@@ -69,8 +69,12 @@ urlpatterns = [
     path('dashboard/social-network-list/', SocIconView.as_view(), name='social-network-list'),
     path('dashboard/create-social-network/', SocIconCreate.as_view(), name='create-social-network'),
     path('dashboard/update-social-network/<int:pk>/', SocIconUpdate.as_view(), name='update-social-network'),
-    # path('email_delete/<int:email_id>/', email_delete, name='email_delete'),
+    path('network_delete/<int:network_id>/', network_delete, name='network_delete'),
+        # CONTACT
+    path('dashboard/update-contact/<int:pk>/', AddContact.as_view(), name='update-contact'),
 ]
+
+
 
 
 

@@ -9,7 +9,7 @@ class SocialNetworkForm(forms.ModelForm):
         fields = ['name', 'url', 'icon', 'status']
         widgets = {
             'name': forms.TextInput(attrs={"class": 'form-control'}),
-            'url': forms.TextInput(attrs={"class": 'form-control'}),
+            'url': forms.URLInput(attrs={"class": 'form-control'}),
             'icon': forms.RadioSelect(attrs={"class": "visually-hidden"}),
             'status': forms.CheckboxInput(attrs={"class": "custom-switch-input", "name": "custom-switch-checkbox"}),
         }

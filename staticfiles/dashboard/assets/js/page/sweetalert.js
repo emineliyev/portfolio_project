@@ -12,6 +12,7 @@ $(".swal").click(function (event) {
     const iconId = $(this).data('icon-id');
     const phoneId = $(this).data('phone-id');
     const emailId = $(this).data('email-id');
+    const networkId = $(this).data('network-id');
 
     swal({
         title: 'Siz əminsiniz?',
@@ -39,6 +40,21 @@ $(".swal").click(function (event) {
                 });
                 $.ajax({
                     url: `/partner_delete/${partnerId}/`,
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function (data) {
+                        swal('Məlumatlar uğurla silindi', {
+                            icon: 'success',
+                        });
+                        setTimeout(function () {
+                            location.reload()
+                        }, 2000)
+                    }
+                });
+                $.ajax({
+                    url: `/network_delete/${networkId}/`,
                     type: 'POST',
                     data: {
                         csrfmiddlewaretoken: '{{ csrf_token }}'

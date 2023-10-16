@@ -6,7 +6,7 @@ class Icons(models.Model):
     icon_code = models.CharField(max_length=60, verbose_name='İkon kodu')
 
     def __str__(self):
-        return f"{self.icon_code}"
+        return f"{self.icon_code} {self.icon_code}"
 
     class Meta:
         verbose_name = 'İkonlar'

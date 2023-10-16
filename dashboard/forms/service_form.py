@@ -19,6 +19,6 @@ class ServiceTypeForm(forms.ModelForm):
         fields = ['name', 'description', 'icon']
         widgets = {
             'name': forms.TextInput(attrs={"class": 'form-control'}),
-            'description': forms.Textarea(attrs={"class": 'summernote '}),
+            'description': forms.Textarea(attrs={"class": 'form-control '}),
             'icon': forms.RadioSelect(attrs={"class": "visually-hidden"}),
         }

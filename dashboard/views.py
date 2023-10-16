@@ -8,8 +8,9 @@ from django.db.models import ProtectedError
 
 from django.views.generic import UpdateView, CreateView, ListView
 from about.models import About, BusinessPlan, Partners
-from arrangements.models import Icons, Phone, Email, SocIcon
+from arrangements.models import Icons, Phone, Email, SocIcon, Arrangements
 from dashboard.forms.about_form import AboutForm, BusinessPlaneForm, PartnersForm
+from dashboard.forms.contact_form import ContactForm
 from dashboard.forms.email_form import EmailForm
 from dashboard.forms.icons_form import IconForm
 from dashboard.forms.phone_form import PhoneForm
@@ -604,3 +605,34 @@ class SocIconUpdate(SuccessMessageMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super(SocIconUpdate, self).get_context_data()
         return context
+
+
+@csrf_exempt
+def network_delete(request, network_id):
+    network = SocIcon.objects.get(id=network_id)
+    try:
+        network.delete()
+        messages.success(request, 'Sosial şəbəkə silindi!')
+
+    except ProtectedError:
+        messages.error(request, 'Xəta baş verdi!')
+    return redirect('dashboards:social-network-list')
+
+
+    # CONTACT
+class AddContact(SuccessMessageMixin, UpdateView):
+    model = Arrangements
+    form_class = ContactForm
+    template_name = 'dashboard/arrangements/contact/update-contact.html'
+    success_message = 'Məlumatlar uğurla yeniləndi!'
+
+    def get_success_url(self):
+        return reverse_lazy('dashboards:update-contact', kwargs={'pk': self.object.pk})
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk')
+        return Arrangements.objects.get(pk=pk)

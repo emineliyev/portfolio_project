@@ -20,7 +20,7 @@ class BusinessPlaneForm(forms.ModelForm):
         fields = ['title', 'description', 'icon']
         widgets = {
             'title': forms.TextInput(attrs={"class": 'form-control'}),
-            'description': forms.Textarea(attrs={"class": 'summernote '}),
+            'description': forms.Textarea(attrs={"class": 'form-control '}),
             'icon': forms.RadioSelect(attrs={"class": "visually-hidden"}),
         }
 
