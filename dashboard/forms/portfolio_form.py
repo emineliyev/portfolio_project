@@ -15,7 +15,7 @@ class PortfolioForm(forms.ModelForm):
         ]
         widgets = {
             'title': forms.TextInput(attrs={"class": "form-control"}),
-            'description': forms.Textarea(attrs={"class": 'summernote'}),
+            'description': forms.Textarea(attrs={"class": 'form-control'}),
             'category': forms.Select(attrs={"class": "form-control selectric"}),
             'client': forms.TextInput(attrs={"class": "form-control"}),
             'delivery_date': forms.DateInput(attrs={"class": "form-control", "type": "date"}),

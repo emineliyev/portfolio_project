@@ -33,7 +33,9 @@
                                     {% for team in teams %}
                                     <tr>
                                         <td>{{ team.name }}</td>
+                                        {% autoescape off %}
                                         <td>{{ team.position }}</td>
+                                        {% endautoescape %}
                                         <td>
                                             <img alt="image" src="{{ team.photo.url }}" width="60">
                                         </td>
