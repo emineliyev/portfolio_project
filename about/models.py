@@ -17,6 +17,7 @@ class About(models.Model):
 class BusinessPlan(models.Model):
     title = models.CharField(max_length=255, verbose_name='Başlıq')
     description = models.TextField(verbose_name='Məzmun')
+    image = models.ImageField(upload_to='business/%Y/%m/%d/', verbose_name='Şəkil')
     icon = models.ForeignKey(Icons, on_delete=models.SET_NULL, null=True, verbose_name='İkon',
                              related_name='icon_business_plan')
 

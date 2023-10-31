@@ -6,6 +6,11 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.errors }}
+                    </div>
+                    {% endif %}
                     <div class="card">
                         <div class="card-header">
                             <h4>Yeni layihə</h4>

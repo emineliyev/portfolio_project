@@ -6,26 +6,54 @@
         <div class="section-body">
             <div class="row">
                 <div class="col-12">
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        {{ form.errors }}
+                    </div>
+                    {% endif %}
                     <div class="card">
                         <div class="card-header">
-                            <h4>Yeni biznes plan</h4>
+                            <h4>Yeni istifadəçi</h4>
                         </div>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{% url 'dashboards:index' %}">Əsas səhifə</a></li>
-                                <li class="breadcrumb-item"><a href="{% url 'dashboards:team-list' %}">Əməkdaşlar</a>
-                                </li>
+                                <li class="breadcrumb-item"><a href="{% url 'accounts:user-list' %}">İstifadəçilər</a></li>
                             </ol>
                         </nav>
                         <div class="card-body">
-                            <form action="{% url 'dashboards:create-team' %}" method="post"
-                                  class="needs-validation" novalidate="" enctype="multipart/form-data">
+                            <form class="needs-validation" novalidate=""
+                                  action="{% url 'accounts:registration' %}" method="post"
+                                  enctype="multipart/form-data">
                                 {% csrf_token %}
+
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.name.id_for_label }}">Ad</label>
+                                           for="{{ form.first_name.id_for_label }}">Ad</label>
                                     <div class="col-sm-12">
-                                        {{ form.name }}
+                                        {{ form.first_name }}
+                                        <div class="invalid-feedback">
+                                            Bu sahə boş ola bilməz!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.last_name.id_for_label }}">Soyad</label>
+                                    <div class="col-sm-12">
+                                        {{ form.last_name }}
+                                        <div class="invalid-feedback">
+                                            Bir kateqoriya seçin!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.username.id_for_label }}">İstifadəçi adı</label>
+                                    <div class="col-sm-12">
+                                        {{ form.username }}
                                         <div class="invalid-feedback">
                                             Bu sahə boş ola bilməz!
                                         </div>
@@ -33,53 +61,32 @@
                                 </div>
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.position.id_for_label }}">Vəzifə</label>
+                                           for="{{ form.password1.id_for_label }}">Şifrə</label>
                                     <div class="col-sm-12">
-                                        {{ form.position }}
+                                        {{ form.password1 }}
+                                        <div class="invalid-feedback">
+                                            Bu sahə boş ola bilməz!
+                                        </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.photo.id_for_label }}">Şəkil</label>
+                                           for="{{ form.password2.id_for_label }}">Şifrə təstiqi</label>
                                     <div class="col-sm-12">
-                                        {{ form.photo }}
+                                        {{ form.password2 }}
                                         <div class="invalid-feedback">
-                                            Şəkil seçin!
+                                            Bu sahə boş ola bilməz!
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.soc_network_facebook.id_for_label }}">Facebook</label>
-                                    <div class="col-sm-12">
-                                        {{ form.soc_network_facebook }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.soc_network_instagram.id_for_label }}">Instagram</label>
-                                    <div class="col-sm-12">
-                                        {{ form.soc_network_instagram }}
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.soc_network_linkedin.id_for_label }}">Linkedin</label>
-                                    <div class="col-sm-12">
-                                        {{ form.soc_network_linkedin }}
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.soc_network_twitter.id_for_label }}">Twitter</label>
-                                    <div class="col-sm-12">
-                                        {{ form.soc_network_twitter }}
-                                    </div>
-                                </div>
+                                <!--                                <div class="form-group row mb-4">-->
+                                <!--                                    <label class="col-form-label text-md-left col-12"-->
+                                <!--                                           for="{{ form.image.id_for_label }}">Şəkil</label>-->
+                                <!--                                    <div class="col-sm-12">-->
+                                <!--                                        {{ form.image }}-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
 
                                 <div class="form-group row mb-4">
                                     <div class="col-sm-12 col-md-7">

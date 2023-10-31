@@ -17,10 +17,11 @@ class AboutForm(forms.ModelForm):
 class BusinessPlaneForm(forms.ModelForm):
     class Meta:
         model = BusinessPlan
-        fields = ['title', 'description', 'icon']
+        fields = ['title', 'description', 'image', 'icon']
         widgets = {
             'title': forms.TextInput(attrs={"class": 'form-control'}),
             'description': forms.Textarea(attrs={"class": 'form-control '}),
+            'image': forms.FileInput(attrs={"class": 'form-control'}),
             'icon': forms.RadioSelect(attrs={"class": "visually-hidden"}),
         }
 

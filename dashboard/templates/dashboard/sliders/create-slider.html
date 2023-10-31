@@ -43,7 +43,17 @@
                                 </div>
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-left col-12"
-                                           for="{{ form.image.id_for_label }}">Şəkil</label>
+                                           for="{{ form.css_selector.id_for_label }}">Css selektor</label>
+                                    <div class="col-sm-12">
+                                        {{ form.css_selector }}
+                                        <div class="invalid-feedback">
+                                            Şəkil seçin!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.image.id_for_label }}">Css selektor</label>
                                     <div class="col-sm-12">
                                         {{ form.image }}
                                         <div class="invalid-feedback">

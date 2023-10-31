@@ -8,17 +8,6 @@
             <li><a href="#" class="nav-link nav-link-lg fullscreen-btn">
                 <i data-feather="maximize"></i>
             </a></li>
-            <li>
-                <form class="form-inline mr-auto">
-                    <div class="search-element">
-                        <input class="form-control" type="search" name="search" placeholder="Axtar" aria-label="Search"
-                               data-width="200">
-                        <button class="btn" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </form>
-            </li>
         </ul>
     </div>
 
@@ -28,7 +17,7 @@
         <li class="dropdown dropdown-list-toggle">
 
             <a href="#" data-toggle="dropdown" class="nav-link nav-link-lg message-toggle"><i data-feather="mail"></i>
-            <span class="badge headerBadge1">6</span>
+                <span class="badge headerBadge1">6</span>
             </a>
 
             <div class="dropdown-menu dropdown-list dropdown-menu-right pullDown">
@@ -42,7 +31,8 @@
                 <div class="dropdown-list-content dropdown-list-message">
                     <a href="#" class="dropdown-item">
                         <span class="dropdown-item-avatar text-white">
-                            <img alt="image" src="{% static '/dashboard/assets/img/users/user-1.png' %}" class="rounded-circle">
+                            <img alt="image" src="{% static '/dashboard/assets/img/users/user-1.png' %}"
+                                 class="rounded-circle">
                         </span>
                         <span class="dropdown-item-desc">
                             <span class="message-user">John Deo</span>
@@ -62,18 +52,26 @@
         <!--User Start-->
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="{% static '/dashboard/assets/img/users/user.png' %}" class="user-img-radious-style">
-            <span class="d-sm-none d-lg-inline-block"></span>
+                {% if user.image %}
+                <img alt="image" src="{{ user.image.url }}" class="user-img-radious-style">
+                {% else %}
+                    <figure class="avatar mr-2 avatar-sm bg-success text-white" data-initial="{{ user.first_name|slice:':1' }} {{ user.last_name|slice:':1' }}"></figure>
+                {% endif %}
+                <span class="d-sm-none d-lg-inline-block"></span>
             </a>
             <div class="dropdown-menu dropdown-menu-right pullDown">
-                <div class="dropdown-title">Salam Admin ad sayad</div>
-                <a href="profile.html" class="dropdown-item has-icon"> <i class="far fa-user"></i> Profil</a>
-
-                <a href="timeline.html" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>İcazələr</a>
-                <a href="#" class="dropdown-item has-icon"> <i class="fas fa-cog"></i>Ayarlar</a>
+                <div class="dropdown-title">Salam, {{ user.first_name }} {{ user.last_name }}</div>
+                {% if user.is_staff %}
+                <div class="dropdown-title"><span class="text-success">Super user</span></div>
+                {% endif %}
+                <a href="{% url 'accounts:profile' %}" class="dropdown-item has-icon"> <i class="far fa-user"></i>
+                    Profil</a>
+                {% if user.is_staff %}
+                <a href="{% url 'accounts:user-list' %}" class="dropdown-item has-icon"> <i class="fas fa-bolt"></i>İstifadəçilər</a>
+                {% endif %}
                 <div class="dropdown-divider"></div>
 
-                <a href="auth-login.html" class="dropdown-item has-icon text-danger">
+                <a href="{% url 'accounts:logout' %}" class="dropdown-item has-icon text-danger">
                     <i class="fas fa-sign-out-alt"></i>Çıxış</a>
             </div>
         </li>

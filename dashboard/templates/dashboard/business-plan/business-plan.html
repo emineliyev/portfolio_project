@@ -1,5 +1,6 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
+{% block title %} {{ block.super }}: İş prinsipimiz {% endblock %}
 {% block content %}
 <div class="main-content">
     <section class="section">
@@ -22,6 +23,7 @@
                                     <tr>
                                         <th>Ad</th>
                                         <th>Məzmun</th>
+                                        <th>Şəkil</th>
                                         <th>İkon</th>
                                         <th></th>
                                         <th></th>
@@ -32,6 +34,9 @@
                                         {% autoescape off %}
                                         <td>{{ business.description|slice:":100" }}</td>
                                         {% endautoescape %}
+                                        <td>
+                                            <img alt="image" src="{{ business.image.url }}" width="60">
+                                        </td>
                                         <td><i class="{{ business.icon }}"></i></td>
                                         <td class="cell_btn"><a
                                                 href="{% url 'dashboards:update-business-plan' business.pk %}"
@@ -41,8 +46,8 @@
                                             <a
                                                     href="{% url 'dashboards:business_plan_delete' business.pk %}"
                                                     class="btn btn-icon btn-danger swal"
-                                                    data-business-id="{{ business.pk }}">
-                                                <i class="fas fa-times"></i>
+                                                    data-business-id="{{ business.id }}">
+                                                <i class="fas fa-trash-alt"></i>
                                             </a>
                                         </td>
                                     </tr>

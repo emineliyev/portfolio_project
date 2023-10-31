@@ -3,9 +3,15 @@
     <aside id="sidebar-wrapper">
         <!-- Logo Start -->
         <div class="sidebar-brand">
-            <a href="index.html">
-                <img alt="image" src="{% static 'dashboard/assets/img/logo/logo.png' %}" class="header-logo"/>
-                <span class="logo-name">Otika</span>
+            <a href="{% url 'portfolio:index' %}">
+                {% if user.image %}
+                <figure class="avatar mr-2">
+                    <img src="{{ user.image.url }}" alt="...">
+                </figure>
+                {% else %}
+                <figure class="avatar mr-2 bg-warning text-white"
+                        data-initial="{{ user.first_name|slice:':1' }}{{ user.last_name|slice:':1' }}"></figure>
+                {% endif %}
             </a>
         </div>
         <!-- Logo End -->
@@ -15,14 +21,13 @@
             <li class="dropdown">
                 <a href="{% url 'dashboards:index' %}" class="nav-link"><i data-feather="monitor"></i><span>Admin panel</span></a>
             </li>
-            <li class="menu-header">Pages</li>
             <!-- About Start -->
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="briefcase"></i><span>Haqqımızda</span></a>
+                        data-feather="help-circle"></i><span>Haqqımızda</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{% url 'dashboards:about' pk=1 %}">Haqqımızda</a></li>
-                    <li><a class="nav-link" href="{% url 'dashboards:business-plan' %}">Biznes plan</a></li>
+                    <li><a class="nav-link" href="{% url 'dashboards:business-plan' %}">İş prinsipimiz</a></li>
                     <li><a class="nav-link" href="{% url 'dashboards:partners-list' %}">Tərəftaşlar</a></li>
                 </ul>
             </li>
@@ -31,7 +36,7 @@
             <!-- Portfolio Start -->
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="command"></i><span>Layihələr</span></a>
+                        data-feather="check-square"></i><span>Layihələr</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{% url 'dashboards:portfolio-list' %}">Layihələr</a></li>
                     <li><a class="nav-link" href="{% url 'dashboards:category-list' %}">Kateqoriyalar</a></li>
@@ -42,7 +47,7 @@
             <!-- Slider Start -->
             <li>
                 <a href="{% url 'dashboards:slider-list' %}" class="nav-link">
-                    <i data-feather="mail"></i><span>Slayderlər</span>
+                    <i data-feather="airplay"></i><span>Slayderlər</span>
                 </a>
             </li>
             <!-- Slider End -->
@@ -50,7 +55,7 @@
             <!-- Services Start -->
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="mail"></i><span>Xidmətlər</span></a>
+                        data-feather="edit"></i><span>Xidmətlər</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{% url 'dashboards:service' pk=1 %}">Xidmət başlıq</a></li>
                     <li><a class="nav-link" href="{% url 'dashboards:services-type-list' %}">Xidmət növləri</a></li>
@@ -61,27 +66,16 @@
             <!-- Team Start -->
             <li>
                 <a href="{% url 'dashboards:team-list' %}" class="nav-link">
-                    <i data-feather="mail"></i><span>Əməkdaşlar</span>
+                    <i data-feather="command"></i><span>Əməkdaşlar</span>
                 </a>
             </li>
             <!-- Team End -->
 
-            <!-- Testimations Start -->
-            <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="mail"></i><span>Şərhlər</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="email-inbox.html">Inbox</a></li>
-                    <li><a class="nav-link" href="email-compose.html">Compose</a></li>
-                    <li><a class="nav-link" href="email-read.html">read</a></li>
-                </ul>
-            </li>
-            <!-- Testimations End -->
 
             <!-- Arrangements Start -->
             <li class="dropdown">
                 <a href="#" class="menu-toggle nav-link has-dropdown"><i
-                        data-feather="mail"></i><span>Parametrlər</span></a>
+                        data-feather="settings"></i><span>Parametrlər</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="{% url 'dashboards:icon-lists' %}">Ikonlar</a></li>
                     <li><a class="nav-link" href="{% url 'dashboards:phone-list' %}">Telefon nömrələri</a></li>

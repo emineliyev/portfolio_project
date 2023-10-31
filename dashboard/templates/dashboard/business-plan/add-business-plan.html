@@ -1,5 +1,6 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
+{% block title %} {{ block.super }}: Yeni iş prinsipi {% endblock %}
 {% block content %}
 <div class="main-content">
     <section class="section">
@@ -19,7 +20,7 @@
                         </nav>
                         <div class="card-body">
                             <form action="{% url 'dashboards:add-business-plan' %}" method="post"
-                                  class="needs-validation" novalidate="">
+                                  class="needs-validation" novalidate="" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-left col-12"
@@ -38,6 +39,18 @@
                                         {{ form.description }}
                                         <div class="invalid-feedback">
                                             Bu sahə boş ola bilməz!
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.image.id_for_label }}">Şəkil</label>
+                                    <div class="col-sm-12">
+                                        <span>Şəkil ölçüsü 770X450</span>
+                                        {{ form.image }}
+                                        <div class="invalid-feedback">
+                                            Şəkil seçin!
                                         </div>
                                     </div>
                                 </div>

@@ -1,6 +1,5 @@
 {% extends 'dashboard/base.html' %}
 {% load static %}
-{% block title %} {{ block.super }}: Nömrələr {% endblock %}
 {% block content %}
 <!-- Main Content -->
 <div class="main-content">
@@ -11,10 +10,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Telefon nömrələri</h4>
+                            <h4>İstifadəçilər</h4>
                         </div>
                         <div class="buttons mx-4 mt-2">
-                            <a href="{% url 'dashboards:create-phone' %}" class="btn btn-success">Yenisini əlavə
+                            <a href="{% url 'accounts:registration' %}" class="btn btn-success">Yenisini əlavə
                                 edin</a>
                         </div>
                         <div class="card-body">
@@ -22,29 +21,29 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
-                                        <th>Telefon</th>
-                                        <th>Status</th>
-                                        <th></th>
+                                        <th>İstifadəçi Adı</th>
+                                        <th>İstifadəçi soyadı</th>
+                                        <th>User name</th>
+                                        <th>Şəkil</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {% for phone in phones %}
+                                    {% for user_list in user_lists %}
                                     <tr>
-                                        <td>{{ phone.phone }}</td>
+                                        <td>{{ user_list.first_name }}</td>
+                                        <td>{{ user_list.last_name }}</td>
+                                        <td>{{ user_list.username }}</td>
                                         <td>
-                                            {% if phone.status == True %}
-                                            <div class="badge badge-success badge-shadow">Activ</div>
+                                            {% if user_list.image %}
+                                            <figure class="avatar mr-2"><img src="{{ user_list.image.url }}" alt="{{ user_list.username }}"></figure>
                                             {% else %}
-                                            <div class="badge badge-danger badge-shadow">Passiv</div>
+                                            <figure class="avatar mr-2 bg-warning text-white" data-initial="{{ user_list.first_name|slice:':1' }}{{ user_list.last_name|slice:':1' }}"></figure>
                                             {% endif %}
                                         </td>
-                                        <td class="cell_btn text-center"><a
-                                                href="{% url 'dashboards:update-phone' phone.pk %}"
-                                                class="btn btn-primary"><i class="fas fa-pen-square"></i></a></td>
                                         <td class="cell_btn text-center">
-                                            <a href="{% url 'dashboards:phone_delete' phone.pk %}"
-                                               class="btn btn-danger swal" data-phone-id="{{ phone.pk }}"><i
+                                            <a href="{% url 'accounts:user_delete' user_list.pk %}"
+                                               class="btn btn-danger swal" data-portfolio-id="{{ portfolio.pk }}"><i
                                                     class="fas fa-trash-alt"></i>
                                             </a>
                                         </td>

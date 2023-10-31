@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.http import HttpResponseRedirect, Http404, request, JsonResponse
+from django.http import HttpResponseRedirect, Http404, JsonResponse
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
@@ -8,6 +10,7 @@ from django.db.models import ProtectedError
 
 from django.views.generic import UpdateView, CreateView, ListView
 from about.models import About, BusinessPlan, Partners
+from account.models import User
 from arrangements.models import Icons, Phone, Email, SocIcon, Arrangements
 from dashboard.forms.about_form import AboutForm, BusinessPlaneForm, PartnersForm
 from dashboard.forms.contact_form import ContactForm
@@ -22,18 +25,28 @@ from dashboard.forms.team_form import TeamForm
 from portfolio.models import Portfolio, PortfolioImage, Category
 from services.models import Service, ServiceType
 from slider.models import Slider
-
-# def handler404(request, exception):
-#     return render(request, '404/404.html', status=404)
 from team.models import Team
 
 
+@login_required
 def index(request):
-    return render(request, 'dashboard/index.html')
+    portfolio_count = Portfolio.objects.count()
+    slider_count = Slider.objects.count()
+    partner_count = Partners.objects.count()
+    team_count = Team.objects.count()
+    user_count = User.objects.count()
+    context = {
+        'portfolio_count': portfolio_count,
+        'slider_count': slider_count,
+        'partner_count': partner_count,
+        'team_count': team_count,
+        'user_count': user_count
+    }
+    return render(request, 'dashboard/index.html', context=context)
 
 
 # ABOUT
-class AddAbout(SuccessMessageMixin, UpdateView):
+class AddAbout(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = About
     form_class = AboutForm
     template_name = 'dashboard/about/about.html'
@@ -52,7 +65,7 @@ class AddAbout(SuccessMessageMixin, UpdateView):
 
 
 # BUSINESS PLAN
-class BusinessPlanView(ListView):
+class BusinessPlanView(LoginRequiredMixin, ListView):
     model = BusinessPlan
     template_name = 'dashboard/business-plan/business-plan.html'
 
@@ -62,7 +75,7 @@ class BusinessPlanView(ListView):
         return context
 
 
-class AddBusinessPlan(SuccessMessageMixin, CreateView):
+class AddBusinessPlan(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = BusinessPlaneForm
     template_name = 'dashboard/business-plan/add-business-plan.html'
     success_url = reverse_lazy('dashboards:business-plan')
@@ -73,7 +86,7 @@ class AddBusinessPlan(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdateBusinessPlan(SuccessMessageMixin, UpdateView):
+class UpdateBusinessPlan(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = BusinessPlan
     form_class = BusinessPlaneForm
     template_name = 'dashboard/business-plan/update-business-plan.html'
@@ -98,7 +111,7 @@ def delete_business_plan(request, business_plan_id):
 
 
 # PARTNERS
-class PartnersListView(ListView):
+class PartnersListView(LoginRequiredMixin, ListView):
     model = Partners
     template_name = 'dashboard/partner/partners-list.html'
 
@@ -108,7 +121,7 @@ class PartnersListView(ListView):
         return context
 
 
-class CreatePartner(SuccessMessageMixin, CreateView):
+class CreatePartner(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = PartnersForm
     template_name = 'dashboard/partner/create-partner.html'
     success_url = reverse_lazy('dashboards:partners-list')
@@ -119,7 +132,7 @@ class CreatePartner(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdatePartner(SuccessMessageMixin, UpdateView):
+class UpdatePartner(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Partners
     form_class = PartnersForm
     template_name = 'dashboard/partner/update-partner.html'
@@ -144,7 +157,7 @@ def delete_partner(request, partner_id):
 
 
 # PORTFOLIO
-class PortfolioListView(ListView):
+class PortfolioListView(LoginRequiredMixin, ListView):
     model = Portfolio
     template_name = 'dashboard/portfolio/portfolio-list.html'
 
@@ -155,7 +168,7 @@ class PortfolioListView(ListView):
         return context
 
 
-class CreatePortfolio(SuccessMessageMixin, CreateView):
+class CreatePortfolio(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Portfolio
     form_class = PortfolioForm
     template_name = 'dashboard/portfolio/create-portfolio.html'
@@ -181,7 +194,7 @@ class CreatePortfolio(SuccessMessageMixin, CreateView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-class UpdatePortfolio(SuccessMessageMixin, UpdateView):
+class UpdatePortfolio(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Portfolio
     form_class = PortfolioForm
     template_name = 'dashboard/portfolio/update-portfolio.html'
@@ -229,7 +242,7 @@ def delete_portfolio(request, portfolio_id):
 
 
 # CATEGORY
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = 'dashboard/portfolio/category-list.html'
 
@@ -239,7 +252,7 @@ class CategoryListView(ListView):
         return context
 
 
-class CreateCategory(SuccessMessageMixin, CreateView):
+class CreateCategory(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = CategoryForm
     template_name = 'dashboard/portfolio/create-category.html'
     success_url = reverse_lazy('dashboards:category-list')
@@ -250,7 +263,7 @@ class CreateCategory(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdateCategory(SuccessMessageMixin, UpdateView):
+class UpdateCategory(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Category
     form_class = CategoryForm
     template_name = 'dashboard/portfolio/update-category.html'
@@ -276,7 +289,7 @@ def category_delete(request, category_id):
 
 
 # SLIDER
-class SliderView(ListView):
+class SliderView(LoginRequiredMixin, ListView):
     model = Slider
     template_name = 'dashboard/sliders/slider-list.html'
 
@@ -286,7 +299,7 @@ class SliderView(ListView):
         return context
 
 
-class CreateSlider(SuccessMessageMixin, CreateView):
+class CreateSlider(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = SliderForm
     template_name = 'dashboard/sliders/create-slider.html'
     success_url = reverse_lazy('dashboards:slider-list')
@@ -297,7 +310,7 @@ class CreateSlider(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdateSlider(SuccessMessageMixin, UpdateView):
+class UpdateSlider(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Slider
     form_class = SliderForm
     template_name = 'dashboard/sliders/update-slider.html'
@@ -322,7 +335,7 @@ def slider_delete(request, slider_id):
 
 
 # SERVICES
-class UpdateService(SuccessMessageMixin, UpdateView):
+class UpdateService(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Service
     form_class = ServiceForm
     template_name = 'dashboard/services/service.html'
@@ -340,7 +353,7 @@ class UpdateService(SuccessMessageMixin, UpdateView):
         return Service.objects.get(pk=pk)
 
 
-class ServiceTypeView(ListView):
+class ServiceTypeView(LoginRequiredMixin, ListView):
     model = ServiceType
     template_name = 'dashboard/services/service-type-list.html'
 
@@ -350,7 +363,7 @@ class ServiceTypeView(ListView):
         return context
 
 
-class CreateServiceType(SuccessMessageMixin, CreateView):
+class CreateServiceType(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = ServiceTypeForm
     template_name = 'dashboard/services/create-service-type.html'
     success_url = reverse_lazy('dashboards:services-type-list')
@@ -361,7 +374,7 @@ class CreateServiceType(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdateServiceType(UpdateView):
+class UpdateServiceType(LoginRequiredMixin, UpdateView):
     model = ServiceType
     form_class = ServiceTypeForm
     template_name = 'dashboard/services/update-service-type.html'
@@ -386,7 +399,7 @@ def service_type_delete(request, services_type_id):
 
 
 # TEAM
-class TeamView(ListView):
+class TeamView(LoginRequiredMixin, ListView):
     model = Team
     template_name = 'dashboard/team/team-list.html'
 
@@ -396,7 +409,7 @@ class TeamView(ListView):
         return context
 
 
-class CreateTeam(SuccessMessageMixin, CreateView):
+class CreateTeam(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = TeamForm
     template_name = 'dashboard/team/create-team.html'
     success_url = reverse_lazy('dashboards:team-list')
@@ -407,7 +420,7 @@ class CreateTeam(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdateTeam(SuccessMessageMixin, UpdateView):
+class UpdateTeam(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Team
     form_class = TeamForm
     template_name = 'dashboard/team/update-team.html'
@@ -433,7 +446,7 @@ def team_delete(request, team_id):
 
 # ARRANGEMENTS
 #     ICONS
-class IconView(ListView):
+class IconView(LoginRequiredMixin, ListView):
     model = Icons
     template_name = 'dashboard/arrangements/icons/icon-lists.html'
 
@@ -443,7 +456,7 @@ class IconView(ListView):
         return context
 
 
-class CreateIcon(SuccessMessageMixin, CreateView):
+class CreateIcon(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = IconForm
     template_name = 'dashboard/arrangements/icons/create-icon.html'
     success_url = reverse_lazy('dashboards:icon-lists')
@@ -454,7 +467,7 @@ class CreateIcon(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdateIcon(UpdateView):
+class UpdateIcon(LoginRequiredMixin, UpdateView):
     model = Icons
     form_class = IconForm
     template_name = 'dashboard/arrangements/icons/update-icon.html'
@@ -480,7 +493,7 @@ def icon_delete(request, icon_id):
     # PHONE NUMBERS
 
 
-class PhoneView(ListView):
+class PhoneView(LoginRequiredMixin, ListView):
     model = Phone
     template_name = 'dashboard/arrangements/phone/phone-list.html'
 
@@ -490,7 +503,7 @@ class PhoneView(ListView):
         return context
 
 
-class CreatePhone(SuccessMessageMixin, CreateView):
+class CreatePhone(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = PhoneForm
     template_name = 'dashboard/arrangements/phone/create-phone.html'
     success_url = reverse_lazy('dashboards:phone-list')
@@ -501,7 +514,7 @@ class CreatePhone(SuccessMessageMixin, CreateView):
         return context
 
 
-class UpdatePhone(SuccessMessageMixin, UpdateView):
+class UpdatePhone(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Phone
     form_class = PhoneForm
     template_name = 'dashboard/arrangements/phone/update-phone.html'
@@ -618,8 +631,9 @@ def network_delete(request, network_id):
         messages.error(request, 'Xəta baş verdi!')
     return redirect('dashboards:social-network-list')
 
-
     # CONTACT
+
+
 class AddContact(SuccessMessageMixin, UpdateView):
     model = Arrangements
     form_class = ContactForm

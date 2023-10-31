@@ -14,7 +14,7 @@ class Icons(models.Model):
 
 
 class Phone(models.Model):
-    phone = models.CharField(max_length=15, verbose_name='Telefon')
+    phone = models.PositiveIntegerField(verbose_name='Telefon')
     status = models.BooleanField(default=True, verbose_name='Status')
 
     def __str__(self):

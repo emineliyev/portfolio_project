@@ -19,7 +19,7 @@ class Portfolio(models.Model):
     client = models.CharField(max_length=255, verbose_name='Müştəri')
     delivery_date = models.DateField(verbose_name='Təhvil tarixi')
     portfolio_url = models.URLField(verbose_name='Layihəyə keçid')
-    status = models.BooleanField(default=False, verbose_name='Status')
+    status = models.BooleanField(default=True, verbose_name='Status')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Sayta yüklənən tarix')
 
     def __str__(self):

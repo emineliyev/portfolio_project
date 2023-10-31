@@ -50,16 +50,34 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label class="form-label">İkon seçin</label>
-                                    <div class="selectgroup selectgroup-pills">
-                                        {% for choice in form.icon %}
-                                        <label class="selectgroup-item">
-                                            {{ choice.tag|safe }}
-                                            <span class="selectgroup-button"><i
-                                                    class="{{ choice.choice_label }}"></i></span>
-                                        </label>
-                                        {% endfor %}
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.soc_network_facebook.id_for_label }}">Facebook</label>
+                                    <div class="col-sm-12">
+                                        {{ form.soc_network_facebook }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.soc_network_instagram.id_for_label }}">Instagram</label>
+                                    <div class="col-sm-12">
+                                        {{ form.soc_network_instagram }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.soc_network_linkedin.id_for_label }}">Linkedin</label>
+                                    <div class="col-sm-12">
+                                        {{ form.soc_network_linkedin }}
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-4">
+                                    <label class="col-form-label text-md-left col-12"
+                                           for="{{ form.soc_network_twitter.id_for_label }}">Twitter</label>
+                                    <div class="col-sm-12">
+                                        {{ form.soc_network_twitter }}
                                     </div>
                                 </div>
 

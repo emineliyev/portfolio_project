@@ -41,11 +41,11 @@ INSTALLED_APPS = [
     'services.apps.ServicesConfig',
     'slider.apps.SliderConfig',
     'team.apps.TeamConfig',
-    'testimation.apps.TestimationConfig',
     'account.apps.AccountConfig',
     'dashboard.apps.DashboardConfig',
     'multiupload',
     'django.contrib.postgres',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -129,7 +129,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'staticfiles')
+    os.path.join(BASE_DIR, 'dashboard/static')
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -138,3 +138,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'account.User'
