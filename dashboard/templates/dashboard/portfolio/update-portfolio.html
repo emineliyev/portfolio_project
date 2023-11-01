@@ -105,7 +105,9 @@
                                            for="{{ form.description.id_for_label }}">Məzmun</label>
                                     <div class="col-sm-12">
                                         {{ form.description }}
-                                        {{ form.error }}
+                                        <div class="invalid-feedback">
+                                            Bu sahə boş ola bilməz!
+                                        </div>
                                     </div>
                                 </div>
 

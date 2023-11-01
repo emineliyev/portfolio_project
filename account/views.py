@@ -1,15 +1,16 @@
 from django.contrib import auth, messages
 from django.contrib.auth import logout, update_session_auth_hash
-from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import ProtectedError
 from django.shortcuts import render, HttpResponseRedirect, redirect
-from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, UpdateView
+from django.urls import reverse
+from django.views.generic import ListView
 from account.forms import UserLoginForm, UserRegistrationForm, UserProfileForm, ChangePasswordForm
 from account.models import User
 
 
-class UserView(ListView):
+class UserView(LoginRequiredMixin, ListView):
     model = User
     template_name = 'account/user-list.html'
 
@@ -19,6 +20,7 @@ class UserView(ListView):
         return context
 
 
+@login_required
 def user_delete(request, user_id):
     user = User.objects.get(id=user_id)
     try:
@@ -48,6 +50,7 @@ def login(request):
     return render(request, 'account/login.html', context=context)
 
 
+@login_required
 def registration(request):
     if request.method == 'POST':
         form = UserRegistrationForm(data=request.POST)
@@ -63,6 +66,7 @@ def registration(request):
     return render(request, 'account/registration.html', context=context)
 
 
+@login_required
 def profile(request):
     if request.method == 'POST':
         form = UserProfileForm(instance=request.user, data=request.POST, files=request.FILES)
@@ -90,6 +94,7 @@ def profile(request):
     return render(request, 'account/profile.html', context=context)
 
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('accounts:login')
